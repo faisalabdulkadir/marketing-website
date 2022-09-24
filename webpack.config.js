@@ -6,11 +6,11 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
   entry: "./src/js/main.js",
   output: {
-    filename: "main.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   devServer: {
     static: path.resolve(__dirname, "dist"),
     port: 8080,
@@ -37,6 +37,16 @@ module.exports = {
         ],
       },
       { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: "asset/resource" },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
     ],
   },
   performance: {
