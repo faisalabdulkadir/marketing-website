@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+  devtool: 'source-map',
   devServer: {
     static: path.resolve(__dirname, "dist"),
     port: 8080,
@@ -35,6 +36,7 @@ module.exports = {
           "sass-loader",
         ],
       },
+      { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: "asset/resource" },
     ],
   },
   performance: {
